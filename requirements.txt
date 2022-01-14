@@ -25,3 +25,5 @@ starlette==0.17.1
 typing-extensions==4.0.1
 Werkzeug==2.0.2
 zipp==3.7.0
+SQLAlchemy-Utils==0.38.2
+passlib==1.7.4
