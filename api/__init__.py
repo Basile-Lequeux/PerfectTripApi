@@ -1,14 +1,17 @@
 from flask import Flask
-from flask_cors import CORS
+from dotenv import dotenv_values
 from flask_sqlalchemy import SQLAlchemy
-from credentials import postgresql_dev
+from flask_cors import CORS
 from flask_migrate import Migrate
-
+import os
 app = Flask(__name__)
 CORS(app)
+config = dotenv_values()
+#development
+#app.config["SQLALCHEMY_DATABASE_URI"] = config["DATABASE_URL"]
 
-app.config[
-    "SQLALCHEMY_DATABASE_URI"] = postgresql_dev
+#Prod
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
