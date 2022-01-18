@@ -12,3 +12,9 @@ https://customer.elephantsql.com/instance
 
 tuto
 https://www.apollographql.com/blog/graphql/python/complete-api-guide/
+
+Pour windows :
+ouvrir terminal windows :
+ - venv\Scripts\activate.bat  -> rentrer dans la console python
+ - pip3 install -r requirements.txt  -> installer les librairies
+ - flask run   -> lancer le projet 
