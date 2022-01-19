@@ -26,7 +26,7 @@ type PostsResult {
 type Query {
     listPosts: PostsResult!
     getPost(id: ID!): PostResult!
-    login(email: String!, password:String!): Boolean!
+    login(email: String!, password:String!): UserResult!
 }
 
 type Mutation {
@@ -40,6 +40,7 @@ type UserResult {
     success: Boolean!
     errors: [String]
     user: User
+    token: String!
 }
 
 type User {

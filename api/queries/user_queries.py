@@ -1,10 +1,20 @@
+import json
 from api.models.User import User
 
 
 def login_resolver(obj, info, email, password):
     user = User.query.filter_by(email=email).first()
-    print("password", user.password)
     if user.password == password:
-        return True
+        auth_token = user.encode_auth_token(str(user.id))
+        payload = {
+            "success": True,
+            "user": user.to_dict(),
+            "token": auth_token.decode()
+        }
     else:
-        return False
+        payload = {
+            "success": False,
+            "error": ["Wrong email or password"]
+        }
+
+    return payload
