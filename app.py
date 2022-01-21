@@ -6,10 +6,10 @@ from flask import request, jsonify
 from api.mutations.create_post import create_post_resolver
 from api.mutations.delete_post import delete_post_resolver
 from api.mutations.update_post import update_post_resolver
-from api.mutations.user_mutations import create_user_resolver
+from api.mutations.create_user import create_user_resolver
 from api.queries.get_list_posts import list_posts_resolver
 from api.queries.get_post import getPost_resolver
-from api.queries.user_queries import login_resolver
+from api.queries.login import login_resolver
 
 query = ObjectType("Query")
 query.set_field("listPosts", list_posts_resolver)

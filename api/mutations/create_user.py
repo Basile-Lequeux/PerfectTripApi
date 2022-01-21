@@ -9,9 +9,11 @@ def create_user_resolver(obj, info, email, password, name):
         )
         db.session.add(user)
         db.session.commit()
+        auth_token = user.encode_auth_token(str(user.id))
         payload = {
             "success": True,
-            "user": user.to_dict()
+            "user": user.to_dict(),
+            "token": auth_token.decode()
         }
     except Exception as error:
         payload = {
