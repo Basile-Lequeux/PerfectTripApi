@@ -32,7 +32,7 @@ class User(db.Model):
         """
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=10),
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id
             }
@@ -46,11 +46,6 @@ class User(db.Model):
 
     @staticmethod
     def decode_auth_token(auth_token):
-        """
-        Decodes the auth token
-        :param auth_token:
-        :return: integer|string
-        """
         try:
             payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'))
             return payload['sub']

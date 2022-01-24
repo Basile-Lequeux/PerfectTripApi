@@ -1,8 +1,12 @@
+import json
+import jwt
 from api import app, db
 from ariadne import load_schema_from_path, make_executable_schema, \
     graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
-from flask import request, jsonify
+from flask import request, jsonify, make_response
+from http import HTTPStatus
+from api.models.User import User
 from api.mutations.create_post import create_post_resolver
 from api.mutations.delete_post import delete_post_resolver
 from api.mutations.update_post import update_post_resolver
@@ -42,5 +46,5 @@ def graphql_server():
         context_value=request,
         debug=app.debug
     )
-    status_code = 200 if success else 400
-    return jsonify(result), status_code
+    status_code = HTTPStatus.OK if success else HTTPStatus.BAD_REQUEST
+    return make_response(jsonify(result), status_code)
