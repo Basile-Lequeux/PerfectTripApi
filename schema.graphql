@@ -12,11 +12,13 @@ type Post {
 }
 
 type PostResult {
+    success: Boolean!
     errors: [String]
     post: Post
 }
 
 type PostsResult {
+    success: Boolean!
     errors: [String]
     posts: [Post]
 }
@@ -35,6 +37,7 @@ type Mutation {
 }
 
 type UserResult {
+    success: Boolean!
     errors: [String]
     user: User
     token: String!
