@@ -5,7 +5,7 @@ from ariadne import convert_kwargs_to_snake_case
 
 @convert_kwargs_to_snake_case
 @token_required
-def getPost_resolver(obj, info, id):
+def getPost_resolver(obj, info, current_user, token, id):
     try:
         post = Post.query.get(id)
         payload = {

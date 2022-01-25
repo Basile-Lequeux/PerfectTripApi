@@ -1,4 +1,3 @@
-import json
 from api.models.User import User
 
 

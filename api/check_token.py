@@ -20,6 +20,7 @@ def token_required(func):
 
         if not token:
             payload = {
+                "success": False,
                 "errors": ["need token"],
             }
 
@@ -28,17 +29,19 @@ def token_required(func):
             user_id = payload['sub']
         except jwt.ExpiredSignatureError:
             payload = {
+                "success": False,
                 "errors": ["Signature expired. Please log in again."],
             }
         except jwt.InvalidTokenError:
             payload = {
+                "success": False,
                 "errors": ["Invalid token. Please log in again."],
             }
 
         current_user = User.query.get(user_id)
 
         if current_user:
-            return func(obj, info, *args, **kwargs)
+            return func(obj, info, current_user, token, *args, **kwargs)
         else:
             return payload
 

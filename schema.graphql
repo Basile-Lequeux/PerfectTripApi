@@ -27,6 +27,7 @@ type Query {
     listPosts: PostsResult!
     getPost(id: ID!): PostResult!
     login(email: String!, password:String!): UserResult!
+    getUserByToken: UserResult!
 }
 
 type Mutation {
