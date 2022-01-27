@@ -8,7 +8,8 @@ tags = db.Table('tags',
 
 class Destination(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), unique=True, nullable=False)
+    name = db.Column(db.String(150), nullable=False)
+    country = db.Column(db.String(150), nullable=True)
     tags = db.relationship('Tag', secondary=tags, lazy='subquery', backref=db.backref('destinations', lazy=True))
 
     def to_dict(self):
