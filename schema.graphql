@@ -28,6 +28,8 @@ type Query {
     getPost(id: ID!): PostResult!
     login(email: String!, password:String!): UserResult!
     getUserByToken: UserResult!
+    getDestination(id: ID!): DestinationResult!
+    listTags: TagsResult!
 }
 
 type Mutation {
@@ -48,4 +50,14 @@ type User {
     id: ID!
     name: String!
     email: String!
+}
+
+type DestinationResult{
+    success: Boolean!
+    id: ID!
+    name: String!
+}
+
+type TagsResult{
+    success: Boolean!
 }

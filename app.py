@@ -11,6 +11,8 @@ from api.mutations.create_post import create_post_resolver
 from api.mutations.delete_post import delete_post_resolver
 from api.mutations.update_post import update_post_resolver
 from api.mutations.create_user import create_user_resolver
+from api.queries.get_all_tags import list_tags_resolver
+from api.queries.get_destination import get_destination_resolver
 from api.queries.get_user_by_token import get_user_by_token_resolver
 from api.queries.get_list_posts import list_posts_resolver
 from api.queries.get_post import getPost_resolver
@@ -21,6 +23,8 @@ query.set_field("listPosts", list_posts_resolver)
 query.set_field("getPost", getPost_resolver)
 query.set_field("login", login_resolver)
 query.set_field("getUserByToken", get_user_by_token_resolver)
+query.set_field("getDestination", get_destination_resolver)
+query.set_field("listTags", list_tags_resolver)
 
 mutation = ObjectType("Mutation")
 mutation.set_field("createPost", create_post_resolver)
