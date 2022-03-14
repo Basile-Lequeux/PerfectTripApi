@@ -8,9 +8,10 @@ from ariadne import convert_kwargs_to_snake_case
 def get_destination_resolver(obj, info, current_user, token, id):
     try:
         destination = Destination.query.get(id)
+        print(destination.to_dict())
         payload = {
             "success": True,
-            "post": destination.to_dict()
+            "destination": destination.to_dict()
         }
     except AttributeError:
         payload = {

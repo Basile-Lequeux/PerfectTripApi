@@ -8,6 +8,7 @@ class Destination(db.Model):
 
     def to_dict(self):
         return {
-            "uuid": self.id,
+            "id": self.id,
             "name": self.name,
+            "country": self.country
         }

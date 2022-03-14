@@ -33,7 +33,7 @@ type Query {
 }
 
 type Mutation {
-    createPost(title: String!, description: String!, created_at: String): PostResult!
+    createPost(title: String!, description: String!, created_at: String, tags: [Int!]): PostResult!
     updatePost(id: ID!, title: String, description: String): PostResult!
     deletePost(id: ID): PostResult!
     createUser(email: String!, password:String!, name:String!): UserResult!
@@ -54,8 +54,14 @@ type User {
 
 type DestinationResult{
     success: Boolean!
+    destination: Destination
+    errors: [String]
+}
+
+type Destination {
     id: ID!
     name: String!
+    country: String!
 }
 
 type TagsResult{
