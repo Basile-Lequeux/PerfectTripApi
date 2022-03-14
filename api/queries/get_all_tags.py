@@ -1,4 +1,4 @@
-from api.models.Destination import Tag
+from api.models.Post import Tag
 
 
 def list_tags_resolver(obj, info):
