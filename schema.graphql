@@ -9,6 +9,12 @@ type Post {
     title: String!
     description: String!
     created_at: String!
+    tags: [String!]
+}
+
+type Tag {
+    id: ID!
+
 }
 
 type PostResult {

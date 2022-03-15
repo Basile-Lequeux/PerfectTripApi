@@ -1,16 +1,20 @@
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
 from api import db
-from api.models.Post import Post
+from api.models.Post import Post, Tag
 
 
 @convert_kwargs_to_snake_case
-def create_post_resolver(obj, info, title, description):
+def create_post_resolver(obj, info, title, description, tags):
     try:
         today = date.today()
         post = Post(
             title=title, description=description, created_at=today.strftime("%b-%d-%Y")
         )
+        for tag_id in tags:
+            tag = Tag.query.get(tag_id)
+            post.tags.append(tag)
+
         db.session.add(post)
         db.session.commit()
         payload = {
