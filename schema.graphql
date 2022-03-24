@@ -10,11 +10,11 @@ type Post {
     description: String!
     created_at: String!
     tags: [String!]
+    created_by: User
 }
 
 type Tag {
     id: ID!
-
 }
 
 type PostResult {
