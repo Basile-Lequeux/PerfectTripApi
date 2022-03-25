@@ -11,6 +11,9 @@ type Post {
     created_at: String!
     tags: [String!]
     created_by: User
+    duration : Float
+    budget : Float
+    destination : Destination
 }
 
 type Tag {
@@ -39,7 +42,7 @@ type Query {
 }
 
 type Mutation {
-    createPost(title: String!, description: String!, created_at: String, tags: [Int!]): PostResult!
+    createPost(title: String!, description: String!, duration: Float, budget:Float, tags: [Int!], destination:Int),  : PostResult!
     updatePost(id: ID!, title: String, description: String): PostResult!
     deletePost(id: ID): PostResult!
     createUser(email: String!, password:String!, name:String!): UserResult!

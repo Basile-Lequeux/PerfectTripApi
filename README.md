@@ -7,6 +7,10 @@ https://ariadnegraphql.org/docs/intro
 flask-migrate
 https://flask-migrate.readthedocs.io/en/latest/
 
+$ flask db migrate -m "Initial migration."
+$ flask db upgrade
+
+
 database browser client
 https://customer.elephantsql.com/instance
 

@@ -12,10 +12,17 @@ class Post(db.Model):
     title = db.Column(db.String)
     description = db.Column(db.String)
     created_at = db.Column(db.Date)
+    duration = db.Column(db.Float, nullable=True)
+    budget = db.Column(db.Float, nullable=True)
+    images_url = db.Column(db.ARRAY(db.String), nullable=True)
+
     tags = db.relationship('Tag', secondary=tags, lazy='subquery', backref=db.backref('posts', lazy=True))
 
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey('user.id'))
     created_by = db.relationship('User', backref=db.backref('posts', lazy=True))
+
+    destination_id = db.Column(db.Integer, db.ForeignKey('destination.id'))
+    destination = db.relationship('Destination', backref=db.backref('posts', lazy=True))
 
     def to_dict(self):
         return {
@@ -24,7 +31,10 @@ class Post(db.Model):
             "description": self.description,
             "created_at": str(self.created_at.strftime('%d-%m-%Y')),
             "tags": self.tags_to_dict(),
-            "created_by": self.created_by
+            "created_by": self.created_by,
+            "duration": self.duration,
+            "budget": self.budget,
+            "destination": self.destination
         }
 
     def tags_to_dict(self):
