@@ -39,6 +39,7 @@ type Query {
     getUserByToken: UserResult!
     getDestination(id: ID!): DestinationResult!
     listTags: TagsResult!
+    listDestination: DestinationsResult!
 }
 
 type Mutation {
@@ -69,10 +70,16 @@ type DestinationResult{
 
 type Destination {
     id: ID!
-    name: String!
-    country: String!
+    name: String
+    country: String
 }
 
 type TagsResult{
     success: Boolean!
+}
+
+type DestinationsResult{
+    success: Boolean!
+    errors: [String]
+    destinations: [Destination]
 }

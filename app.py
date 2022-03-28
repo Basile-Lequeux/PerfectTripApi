@@ -17,6 +17,7 @@ from api.queries.get_user_by_token import get_user_by_token_resolver
 from api.queries.get_list_posts import list_posts_resolver
 from api.queries.get_post import getPost_resolver
 from api.queries.login import login_resolver
+from api.queries.get_list_destination import list_destination_resolver
 
 query = ObjectType("Query")
 query.set_field("listPosts", list_posts_resolver)
@@ -25,6 +26,7 @@ query.set_field("login", login_resolver)
 query.set_field("getUserByToken", get_user_by_token_resolver)
 query.set_field("getDestination", get_destination_resolver)
 query.set_field("listTags", list_tags_resolver)
+query.set_field("listDestination", list_destination_resolver)
 
 mutation = ObjectType("Mutation")
 mutation.set_field("createPost", create_post_resolver)
