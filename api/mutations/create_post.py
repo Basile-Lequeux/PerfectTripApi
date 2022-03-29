@@ -28,9 +28,11 @@ def create_post_resolver(obj, info, current_user, token, title, description, dur
 
         db.session.add(post)
         db.session.commit()
+        posts = [post.to_dict() for post in Post.query.all()]
         payload = {
             "success": True,
-            "post": post.to_dict()
+            "post": post.to_dict(),
+            "posts": posts
         }
     except ValueError:  # date format errors
         payload = {

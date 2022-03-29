@@ -25,6 +25,7 @@ type PostResult {
     success: Boolean!
     errors: [String]
     post: Post
+    posts: [Post]
 }
 
 type PostsResult {
