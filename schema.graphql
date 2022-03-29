@@ -18,6 +18,7 @@ type Post {
 
 type Tag {
     id: ID!
+    name: String!
 }
 
 type PostResult {
@@ -76,6 +77,8 @@ type Destination {
 
 type TagsResult{
     success: Boolean!
+    errors: [String]
+    tags: [Tag]
 }
 
 type DestinationsResult{

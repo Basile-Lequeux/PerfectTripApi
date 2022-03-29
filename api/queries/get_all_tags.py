@@ -6,7 +6,7 @@ def list_tags_resolver(obj, info):
         tags = [post.to_dict() for post in Tag.query.all()]
         payload = {
             "success": True,
-            "posts": tags
+            "tags": tags
         }
     except Exception as error:
         payload = {
