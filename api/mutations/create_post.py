@@ -1,4 +1,6 @@
 from datetime import date
+
+import cloudinary.uploader
 from ariadne import convert_kwargs_to_snake_case
 from api import db
 from api.check_token import token_required
@@ -9,10 +11,11 @@ from api.models.User import User
 
 @token_required
 @convert_kwargs_to_snake_case
-def create_post_resolver(obj, info, current_user, token, title, description, duration, budget, tags, destination):
+def create_post_resolver(obj, info, current_user, token, title, description, duration, budget, tags, destination, images):
     try:
         today = date.today()
         ref_destination = Destination.query.get(destination)
+        images_urls = build_images_urls(images)
         post = Post(
             title=title,
             description=description,
@@ -20,7 +23,8 @@ def create_post_resolver(obj, info, current_user, token, title, description, dur
             duration=duration,
             budget=budget,
             created_by=current_user,
-            destination=ref_destination
+            destination=ref_destination,
+            images_url=images_urls
         )
         for tag_id in tags:
             tag = Tag.query.get(tag_id)
@@ -41,3 +45,14 @@ def create_post_resolver(obj, info, current_user, token, title, description, dur
                        f"the format dd-mm-yyyy"]
         }
     return payload
+
+
+def build_images_urls(images):
+    image_array = []
+    for image64 in images:
+        #TODO check if valid image base 64
+        upload_data = cloudinary.uploader.upload(image64, folder='articleImage')
+        image_uri = upload_data["url"]
+        image_array.append(image_uri)
+
+    return image_array

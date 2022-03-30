@@ -22,3 +22,6 @@ ouvrir terminal windows :
  - venv\Scripts\activate.bat  -> rentrer dans la console python
  - pip3 install -r requirements.txt  -> installer les librairies
  - flask run   -> lancer le projet 
+
+
+NE PAS OUBLIER DE DEMANDER LE .ENV POUR LANCER LE PROJET
