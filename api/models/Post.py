@@ -34,7 +34,8 @@ class Post(db.Model):
             "created_by": self.created_by,
             "duration": self.duration,
             "budget": self.budget,
-            "destination": self.destination
+            "destination": self.destination,
+            "images": self.images_url
         }
 
     def tags_to_dict(self):
