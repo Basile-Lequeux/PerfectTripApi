@@ -1,14 +1,16 @@
 from app import db
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import text as sa_text
 
 tags = db.Table('tags',
                 db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
-                db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True)
+                db.Column('post_id', UUID(as_uuid=True), db.ForeignKey('post.id'), primary_key=True)
                 )
 
 
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    #id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, server_default=sa_text("uuid_generate_v4()"))
     title = db.Column(db.String)
     description = db.Column(db.String)
     created_at = db.Column(db.Date)

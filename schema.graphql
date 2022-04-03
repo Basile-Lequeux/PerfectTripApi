@@ -3,7 +3,6 @@ schema {
     mutation: Mutation
 }
 
-
 type Post {
     id: ID!
     title: String!
@@ -65,7 +64,7 @@ type User {
     email: String!
 }
 
-type DestinationResult{
+type DestinationResult {
     success: Boolean!
     destination: Destination
     errors: [String]
@@ -77,13 +76,13 @@ type Destination {
     country: String
 }
 
-type TagsResult{
+type TagsResult {
     success: Boolean!
     errors: [String]
     tags: [Tag]
 }
 
-type DestinationsResult{
+type DestinationsResult {
     success: Boolean!
     errors: [String]
     destinations: [Destination]
