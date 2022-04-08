@@ -7,7 +7,7 @@ from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify, make_response
 from http import HTTPStatus
 from api.models.User import User
-from api.mutations.create_post import create_post_resolver
+from api.mutations.create_post import create_post_resolver, check_valid_base64_images, build_images_urls
 from api.mutations.delete_post import delete_post_resolver
 from api.mutations.update_post import update_post_resolver
 from api.mutations.create_user import create_user_resolver
@@ -18,6 +18,8 @@ from api.queries.get_list_posts import list_posts_resolver
 from api.queries.get_post import getPost_resolver
 from api.queries.login import login_resolver
 from api.queries.get_list_destination import list_destination_resolver
+from api.models.Post import add_tags_to_db
+from api.models.Destination import add_destinations_to_db
 
 query = ObjectType("Query")
 query.set_field("listPosts", list_posts_resolver)

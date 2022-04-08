@@ -1,3 +1,4 @@
+import base64
 from datetime import date
 
 import cloudinary.uploader
@@ -7,11 +8,13 @@ from api.check_token import token_required
 from api.models.Destination import Destination
 from api.models.Post import Post, Tag
 from api.models.User import User
+from datauri import DataURI
 
 
 @token_required
 @convert_kwargs_to_snake_case
-def create_post_resolver(obj, info, current_user, token, title, description, duration, budget, tags, destination, images):
+def create_post_resolver(obj, info, current_user, token, title, description, duration, budget, tags, destination,
+                         images):
     try:
         today = date.today()
         ref_destination = Destination.query.get(destination)
@@ -50,9 +53,18 @@ def create_post_resolver(obj, info, current_user, token, title, description, dur
 def build_images_urls(images):
     image_array = []
     for image64 in images:
-        #TODO check if valid image base 64
-        upload_data = cloudinary.uploader.upload(image64, folder='articleImage')
-        image_uri = upload_data["url"]
-        image_array.append(image_uri)
-
+        if check_valid_base64_images(image64):
+            upload_data = cloudinary.uploader.upload(image64, folder='articleImage')
+            image_uri = upload_data["url"]
+            image_array.append(image_uri)
     return image_array
+
+
+def check_valid_base64_images(image):
+    try:
+        uri = DataURI(image)
+        if uri.mimetype == "image/png" or uri.mimetype == "image/jpeg" and uri.is_base64:
+            return True
+        return False
+    except Exception:
+        return False
