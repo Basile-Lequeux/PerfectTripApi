@@ -18,8 +18,10 @@ from api.queries.get_list_posts import list_posts_resolver
 from api.queries.get_post import getPost_resolver
 from api.queries.login import login_resolver
 from api.queries.get_list_destination import list_destination_resolver
-from api.models.Post import add_tags_to_db
-from api.models.Destination import add_destinations_to_db
+
+# for dev scripts
+#from api.models.Post import add_tags_to_db
+#from api.models.Destination import add_destinations_to_db
 
 query = ObjectType("Query")
 query.set_field("listPosts", list_posts_resolver)
