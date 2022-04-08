@@ -33,3 +33,4 @@ typing-extensions==4.0.1
 Werkzeug==2.0.2
 zipp==3.7.0
 cloudinary~=1.29.0
+datauri~=1.0.0
