@@ -6,7 +6,7 @@ import app
 
 
 class TestPostModel(unittest.TestCase):
-    type_defs = load_schema_from_path("schema.graphql")
+    type_defs = load_schema_from_path("../schema.graphql")
     query = ObjectType("Query")
     query.set_field("listPosts", app.list_posts_resolver)
     schema = make_executable_schema(
