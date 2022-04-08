@@ -55,7 +55,7 @@ type UserResult {
     success: Boolean!
     errors: [String]
     user: User
-    token: String!
+    token: String
 }
 
 type User {
