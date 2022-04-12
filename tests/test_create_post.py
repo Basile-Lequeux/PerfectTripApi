@@ -1,7 +1,7 @@
 import base64
 import unittest
 import app
-
+from api.models.Post import Post
 
 # WARNING -> NEED FILES 'voyage.jpg' & 'testfile.json' IN THE TEST FOLDER
 class MyTestCase(unittest.TestCase):

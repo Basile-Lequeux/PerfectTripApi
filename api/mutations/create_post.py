@@ -1,6 +1,5 @@
 import base64
 from datetime import date
-
 import cloudinary.uploader
 from ariadne import convert_kwargs_to_snake_case
 from api import db
@@ -9,7 +8,6 @@ from api.models.Destination import Destination
 from api.models.Post import Post, Tag
 from api.models.User import User
 from datauri import DataURI
-
 
 @token_required
 @convert_kwargs_to_snake_case
@@ -41,7 +39,7 @@ def create_post_resolver(obj, info, current_user, token, title, description, dur
             "post": post.to_dict(),
             "posts": posts
         }
-    except ValueError:  # date format errors
+    except ValueError:
         payload = {
             "success": False,
             "errors": [f"Incorrect date format provided. Date should be in "

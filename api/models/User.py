@@ -27,15 +27,11 @@ class User(db.Model):
 
     @staticmethod
     def encode_auth_token(user_id):
-        """
-        Generates the Auth Token
-        :return: string
-        """
         try:
             payload = {
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(days=10),
                 'iat': datetime.datetime.utcnow(),
-                'sub': user_id
+                    'sub': user_id
             }
             return jwt.encode(
                 payload,
@@ -49,7 +45,7 @@ class User(db.Model):
     def decode_auth_token(auth_token):
         try:
             payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'))
-            return payload['sub']
+            return payload
         except jwt.ExpiredSignatureError:
             return 'Signature expired. Please log in again.'
         except jwt.InvalidTokenError:

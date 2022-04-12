@@ -9,7 +9,6 @@ tags = db.Table('tags',
 
 
 class Post(db.Model):
-    #id = db.Column(db.Integer, primary_key=True)
     id = db.Column(UUID(as_uuid=True), primary_key=True, server_default=sa_text("uuid_generate_v4()"))
     title = db.Column(db.String)
     description = db.Column(db.String)
@@ -45,6 +44,16 @@ class Post(db.Model):
         for tag in self.tags:
             array.append(tag.name)
         return array
+
+
+def add_tags_to_db():
+    file = open('tags.txt', 'r')
+    tags = file.readlines()
+    for line in tags:
+        tag = Tag(name=str.strip(line))
+        db.session.add(tag)
+
+    db.session.commit()
 
 
 class Tag(db.Model):

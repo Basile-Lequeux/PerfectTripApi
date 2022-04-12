@@ -23,7 +23,7 @@ def token_required(func):
             }
 
         try:
-            payload = jwt.decode(token, app.config.get('SECRET_KEY'))
+            payload = User.decode_auth_token(token)
             user_id = payload['sub']
         except jwt.ExpiredSignatureError:
             payload = {
