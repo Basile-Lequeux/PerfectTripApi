@@ -9,13 +9,20 @@ from api.models.Post import Post, Tag
 from api.models.User import User
 from datauri import DataURI
 
+
 @token_required
 @convert_kwargs_to_snake_case
 def create_post_resolver(obj, info, current_user, token, title, description, duration, budget, tags, destination,
                          images):
     try:
         today = date.today()
-        ref_destination = Destination.query.get(destination)
+        try:
+            ref_destination = Destination.query.get(destination)
+        except:
+            return {
+                "success": False,
+                "errors": ["Destination doesn't exists"]
+            }
         images_urls = build_images_urls(images)
         post = Post(
             title=title,
@@ -28,7 +35,13 @@ def create_post_resolver(obj, info, current_user, token, title, description, dur
             images_url=images_urls
         )
         for tag_id in tags:
-            tag = Tag.query.get(tag_id)
+            try:
+                tag = Tag.query.get(tag_id)
+            except:
+                return {
+                    "success": False,
+                    "errors": ["Tag doesn't exists"]
+                }
             post.tags.append(tag)
 
         db.session.add(post)
