@@ -35,7 +35,7 @@ type PostsResult {
 }
 
 type Query {
-    listPosts(tags: [Int]): PostsResult!
+    listPosts: PostsResult!
     getPost(id: ID!): PostResult!
     login(email: String!, password:String!): UserResult!
     getUserByToken: UserResult!
