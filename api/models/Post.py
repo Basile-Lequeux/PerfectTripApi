@@ -31,7 +31,7 @@ class Post(db.Model):
             "title": self.title,
             "description": self.description,
             "created_at": str(self.created_at.strftime('%d-%m-%Y')),
-            "tags": self.tags_to_dict(),
+            "tags": self.tags,
             "created_by": self.created_by,
             "duration": self.duration,
             "budget": self.budget,

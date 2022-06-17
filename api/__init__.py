@@ -6,12 +6,15 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 import os
 
+from sqlalchemy import create_engine
+
 app = Flask(__name__)
 CORS(app)
 config = dotenv_values()
 
 # development
 # app.config["SQLALCHEMY_DATABASE_URI"] = config["DATABASE_URL"]
+# engine = create_engine(config["DATABASE_URL"])
 # app.config["SECRET_KEY"] = config["SECRET_KEY"]
 
 # cloudinary.config(
@@ -22,6 +25,7 @@ config = dotenv_values()
 
 # Prod
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+engine = create_engine(os.environ.get("DATABASE_URL"))
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
@@ -30,7 +34,6 @@ cloudinary.config(
 )
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
