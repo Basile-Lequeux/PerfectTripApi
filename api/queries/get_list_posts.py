@@ -7,7 +7,7 @@ from api.models.Post import Post
 def list_posts_resolver(obj, info, current_user, token, tags):
     try:
         posts = []
-        if len(tags) > 1:
+        if len(tags) > 0:
             tags_string = ','.join(map(str, tags))
             with engine.connect() as db_connect:
                 query_string = """
@@ -23,6 +23,8 @@ def list_posts_resolver(obj, info, current_user, token, tags):
                     post = Post.query.get(row[1])
                     print(post.to_dict())
                     posts.append(post.to_dict())
+        else:
+            posts = [post.to_dict() for post in Post.query.all()]
         payload = {
             "success": True,
             "posts": posts
