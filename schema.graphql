@@ -8,12 +8,24 @@ type Post {
     title: String!
     description: String!
     created_at: String!
+    tags: [Tag]
+    created_by: User
+    duration : Float
+    budget : Float
+    destination : Destination
+    images: [String]
+}
+
+type Tag {
+    id: ID!
+    name: String!
 }
 
 type PostResult {
     success: Boolean!
     errors: [String]
     post: Post
+    posts: [Post]
 }
 
 type PostsResult {
@@ -23,12 +35,56 @@ type PostsResult {
 }
 
 type Query {
-    listPosts: PostsResult!
+    listPosts(tags: [Int]): PostsResult!
     getPost(id: ID!): PostResult!
+    login(email: String!, password:String!): UserResult!
+    getUserByToken: UserResult!
+    getDestination(id: ID!): DestinationResult!
+    listTags: TagsResult!
+    listDestination: DestinationsResult!
+    getTagsGeneration(images_array: [String]): TagsResult!
 }
 
 type Mutation {
-    createPost(title: String!, description: String!, created_at: String): PostResult!
-    updatePost(id: ID!, title: String, description: String): PostResult!
+    createPost(title: String!, description: String!, duration: Float, budget:Float, tags: [Int], destination:Int, images:[String]) : PostResult!
+    updatePost(id: ID!, tags: [Int!]): PostResult!
     deletePost(id: ID): PostResult!
+    createUser(email: String!, password:String!, name:String!): UserResult!
+}
+
+type UserResult {
+    success: Boolean!
+    errors: [String]
+    user: User
+    token: String
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+type DestinationResult {
+    success: Boolean!
+    destination: Destination
+    errors: [String]
+}
+
+type Destination {
+    id: ID!
+    name: String
+    country: String
+}
+
+type TagsResult {
+    success: Boolean!
+    errors: [String]
+    tags: [Tag]
+}
+
+type DestinationsResult {
+    success: Boolean!
+    errors: [String]
+    destinations: [Destination]
 }
