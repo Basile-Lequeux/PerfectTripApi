@@ -18,6 +18,7 @@ from api.queries.get_list_posts import list_posts_resolver
 from api.queries.get_post import getPost_resolver
 from api.queries.login import login_resolver
 from api.queries.get_list_destination import list_destination_resolver
+from api.queries.get_tags_generation import get_tags_generation_resolver
 
 # for dev scripts
 #from api.models.Post import add_tags_to_db
@@ -31,6 +32,7 @@ query.set_field("getUserByToken", get_user_by_token_resolver)
 query.set_field("getDestination", get_destination_resolver)
 query.set_field("listTags", list_tags_resolver)
 query.set_field("listDestination", list_destination_resolver)
+query.set_field("getTagsGeneration", get_tags_generation_resolver)
 
 mutation = ObjectType("Mutation")
 mutation.set_field("createPost", create_post_resolver)

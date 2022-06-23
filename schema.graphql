@@ -42,6 +42,7 @@ type Query {
     getDestination(id: ID!): DestinationResult!
     listTags: TagsResult!
     listDestination: DestinationsResult!
+    getTagsGeneration(images_array: [String]): TagsResult!
 }
 
 type Mutation {
