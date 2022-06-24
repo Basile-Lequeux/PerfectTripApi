@@ -2,6 +2,8 @@ from ariadne import convert_kwargs_to_snake_case
 from api.check_token import token_required
 import requests
 from api import app
+from api.models.Post import Tag
+import json
 
 
 @token_required
@@ -15,9 +17,16 @@ def get_tags_generation_resolver(obj, info, current_user, token, images_array):
             params_array.append(json_object)
         params = {"img_data": params_array}
         response = requests.post(url, json=params)
-        print(response.text)
 
-        payload = response.text
+        tag_array = []
+        for tag_id in json.loads(response.text):
+            tag = Tag.query.get(tag_id)
+            tag_array.append(tag)
+
+        payload = {
+            "success": True,
+            "tags": tag_array
+        }
     except ValueError:
         payload = {
             "success": False,

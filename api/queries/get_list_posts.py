@@ -21,7 +21,6 @@ def list_posts_resolver(obj, info, current_user, token, tags):
                 query = db_connect.execute(query_string)
                 for row in query:
                     post = Post.query.get(row[1])
-                    print(post.to_dict())
                     posts.append(post.to_dict())
         else:
             posts = [post.to_dict() for post in Post.query.all()]
