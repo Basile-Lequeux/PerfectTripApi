@@ -30,7 +30,7 @@ def get_tags_generation_resolver(obj, info, current_user, token, images_array):
     except ValueError:
         payload = {
             "success": False,
-            "errors": "Something went wrong"
+            "errors": ["Something went wrong with the AI"]
         }
 
     return payload
