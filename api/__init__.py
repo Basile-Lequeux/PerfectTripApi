@@ -16,6 +16,7 @@ config = dotenv_values()
 # app.config["SQLALCHEMY_DATABASE_URI"] = config["DATABASE_URL"]
 # engine = create_engine(config["DATABASE_URL"])
 # app.config["SECRET_KEY"] = config["SECRET_KEY"]
+# app.config["PERFECT_TRIP_AI_URL"] = config["PERFECT_TRIP_AI_URL"]
 
 # cloudinary.config(
 #    cloud_name=config["CLOUDINARY_CLOUD_NAME"],
@@ -27,6 +28,7 @@ config = dotenv_values()
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 engine = create_engine(os.environ.get("DATABASE_URL"))
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+app.config["PERFECT_TRIP_AI_URL"] = os.environ.get("PERFECT_TRIP_AI_URL")
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
